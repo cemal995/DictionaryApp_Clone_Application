@@ -69,7 +69,6 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
     func didFetchWordDefinitions(_ definitions: [WordDefinition]) {
         DispatchQueue.main.async {
             self.router.navigateToWordDetails(details: definitions)
-            //print(definitions)
         }
     }
 }

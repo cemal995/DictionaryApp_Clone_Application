@@ -11,11 +11,16 @@ public struct WordDefinition: Decodable {
     public let word: String?
     public let phonetic: String? 
     public let meanings: [Meaning]?
+    public let phonetics: [Phonetic]?
 }
 
 public struct Meaning: Decodable {
     public let partOfSpeech: String?
     public let definitions: [Definition]?
+}
+
+public struct Phonetic: Decodable {
+    public let audio: String?
 }
 
 public struct Definition: Decodable {

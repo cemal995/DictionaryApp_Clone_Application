@@ -39,7 +39,6 @@ public class NetworkManager: NetworkService {
             do {
                 let wordDefinitions = try JSONDecoder().decode([WordDefinition].self, from: data)
                 completion(.success(wordDefinitions))
-                //print(wordDefinitions)
             } catch {
                 completion(.failure(.decodingError))
             }
