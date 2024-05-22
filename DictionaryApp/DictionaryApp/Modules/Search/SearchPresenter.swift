@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import DictionaryAPI
 
 protocol SearchPresenterProtocol: AnyObject {
     func addSearchQuery(_ query: String)
     func removeSearchQuery(at index: Int)
     func numberOfRecentSearches() -> Int
     func recentSearch(at index: Int) -> String
+    func fetchWordDefinition(for word: String)
 }
 
 final class SearchPresenter {
@@ -44,15 +46,30 @@ extension SearchPresenter: SearchPresenterProtocol {
     func recentSearch(at index: Int) -> String {
         return interactor.fetchRecentSearches()[index]
     }
+    
+    func fetchWordDefinition(for word: String) {
+        interactor.fetchWordDefinition(for: word) 
+    }
 }
 
 extension SearchPresenter: SearchInteractorOutputProtocol {
     
     func didUpdateRecentSearches() {
-        view.reloadData()
+        DispatchQueue.main.async {
+            self.view.reloadData()
+        }
     }
     
     func didFailWithError(_ error: Error) {
-        view.showError(error.localizedDescription)
+        DispatchQueue.main.async {
+            self.view.showError(error.localizedDescription)
+        }
+    }
+    
+    func didFetchWordDefinitions(_ definitions: [WordDefinition]) {
+        DispatchQueue.main.async {
+            self.router.navigateToWordDetails(details: definitions)
+            //print(definitions)
+        }
     }
 }

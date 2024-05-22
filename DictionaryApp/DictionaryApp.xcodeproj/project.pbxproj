@@ -27,12 +27,18 @@
 		8E3925C32BF77771004F65E7 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3925C22BF77771004F65E7 /* SearchPresenter.swift */; };
 		8E3925C52BF7777D004F65E7 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3925C42BF7777D004F65E7 /* SearchInteractor.swift */; };
 		8E3925C72BF7778C004F65E7 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3925C62BF7778C004F65E7 /* SearchRouter.swift */; };
+		8E48FA5F2BFB76C1005A6C1F /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FA5E2BFB76C1005A6C1F /* LoadingShowable.swift */; };
+		8E48FA612BFB76FC005A6C1F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FA602BFB76FC005A6C1F /* LoadingView.swift */; };
+		8E48FA632BFB7767005A6C1F /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FA622BFB7767005A6C1F /* UITableView.swift */; };
+		8E48FA652BFB7776005A6C1F /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FA642BFB7776005A6C1F /* UITableViewCell.swift */; };
 		8EA0688C2BF77ABF00A598FF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA0688B2BF77ABF00A598FF /* BaseViewController.swift */; };
 		8EA0688F2BF784DD00A598FF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA0688D2BF784DD00A598FF /* SplashViewController.swift */; };
 		8EA068902BF784DD00A598FF /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA0688E2BF784DD00A598FF /* SplashViewController.xib */; };
 		8EA068932BF787CF00A598FF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA068912BF787CF00A598FF /* SearchViewController.swift */; };
 		8EA1C8BA2BF92BB7007D8036 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EA1C8B92BF92BB7007D8036 /* DetailViewController.xib */; };
 		8EA1C8BB2BF92BB7007D8036 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1C8B82BF92BB7007D8036 /* DetailViewController.swift */; };
+		8EF4DB122BFCAE01008957C7 /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4DB102BFCAE01008957C7 /* DetailViewCell.swift */; };
+		8EF4DB132BFCAE01008957C7 /* DetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF4DB112BFCAE01008957C7 /* DetailViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,12 +82,18 @@
 		8E3925C22BF77771004F65E7 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		8E3925C42BF7777D004F65E7 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		8E3925C62BF7778C004F65E7 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		8E48FA5E2BFB76C1005A6C1F /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
+		8E48FA602BFB76FC005A6C1F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		8E48FA622BFB7767005A6C1F /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		8E48FA642BFB7776005A6C1F /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		8EA0688B2BF77ABF00A598FF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8EA0688D2BF784DD00A598FF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8EA0688E2BF784DD00A598FF /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		8EA068912BF787CF00A598FF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8EA1C8B82BF92BB7007D8036 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8EA1C8B92BF92BB7007D8036 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		8EF4DB102BFCAE01008957C7 /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
+		8EF4DB112BFCAE01008957C7 /* DetailViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +224,8 @@
 		8E3925A92BF77601004F65E7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8E48FA622BFB7767005A6C1F /* UITableView.swift */,
+				8E48FA642BFB7776005A6C1F /* UITableViewCell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -219,6 +233,8 @@
 		8E3925AA2BF7760A004F65E7 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8EF4DB102BFCAE01008957C7 /* DetailViewCell.swift */,
+				8EF4DB112BFCAE01008957C7 /* DetailViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -226,6 +242,7 @@
 		8E3925AB2BF7761A004F65E7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8E48FA5E2BFB76C1005A6C1F /* LoadingShowable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -233,6 +250,7 @@
 		8E3925AC2BF7761F004F65E7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E48FA602BFB76FC005A6C1F /* LoadingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,10 +259,10 @@
 			isa = PBXGroup;
 			children = (
 				8EA068912BF787CF00A598FF /* SearchViewController.swift */,
-				8E3925C22BF77771004F65E7 /* SearchPresenter.swift */,
 				8E3925C42BF7777D004F65E7 /* SearchInteractor.swift */,
-				8E3925C62BF7778C004F65E7 /* SearchRouter.swift */,
+				8E3925C22BF77771004F65E7 /* SearchPresenter.swift */,
 				8E01032B2BFB574100175A55 /* SearchEntity.swift */,
+				8E3925C62BF7778C004F65E7 /* SearchRouter.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -254,8 +272,8 @@
 			children = (
 				8EA1C8B82BF92BB7007D8036 /* DetailViewController.swift */,
 				8EA1C8B92BF92BB7007D8036 /* DetailViewController.xib */,
-				8E3925BA2BF77746004F65E7 /* DetailPresenter.swift */,
 				8E3925BC2BF77751004F65E7 /* DetailInteractor.swift */,
+				8E3925BA2BF77746004F65E7 /* DetailPresenter.swift */,
 				8E3925BE2BF7775A004F65E7 /* DetailRouter.swift */,
 			);
 			path = Detail;
@@ -266,8 +284,8 @@
 			children = (
 				8EA0688D2BF784DD00A598FF /* SplashViewController.swift */,
 				8EA0688E2BF784DD00A598FF /* SplashViewController.xib */,
-				8E3925B22BF776E1004F65E7 /* SplashPresenter.swift */,
 				8E3925B42BF776F3004F65E7 /* SplashInteractor.swift */,
+				8E3925B22BF776E1004F65E7 /* SplashPresenter.swift */,
 				8E3925B62BF776FF004F65E7 /* SplashRouter.swift */,
 			);
 			path = Splash;
@@ -391,6 +409,7 @@
 				8E24530E2BF761B3004EB92F /* Assets.xcassets in Resources */,
 				8EA1C8BA2BF92BB7007D8036 /* DetailViewController.xib in Resources */,
 				8E2453112BF761B3004EB92F /* Base in Resources */,
+				8EF4DB132BFCAE01008957C7 /* DetailViewCell.xib in Resources */,
 				8E2453092BF761B3004EB92F /* Base in Resources */,
 				8EA068902BF784DD00A598FF /* SplashViewController.xib in Resources */,
 			);
@@ -420,19 +439,24 @@
 				8E24530C2BF761B3004EB92F /* DictionaryApp.xcdatamodeld in Sources */,
 				8E3925BF2BF7775A004F65E7 /* DetailRouter.swift in Sources */,
 				8E3925BD2BF77751004F65E7 /* DetailInteractor.swift in Sources */,
+				8EF4DB122BFCAE01008957C7 /* DetailViewCell.swift in Sources */,
 				8E3925B52BF776F3004F65E7 /* SplashInteractor.swift in Sources */,
 				8E3925BB2BF77746004F65E7 /* DetailPresenter.swift in Sources */,
 				8E3925C72BF7778C004F65E7 /* SearchRouter.swift in Sources */,
 				8E3925C52BF7777D004F65E7 /* SearchInteractor.swift in Sources */,
 				8E01032C2BFB574100175A55 /* SearchEntity.swift in Sources */,
 				8EA1C8BB2BF92BB7007D8036 /* DetailViewController.swift in Sources */,
+				8E48FA5F2BFB76C1005A6C1F /* LoadingShowable.swift in Sources */,
 				8E3925B72BF776FF004F65E7 /* SplashRouter.swift in Sources */,
 				8E3925B32BF776E1004F65E7 /* SplashPresenter.swift in Sources */,
+				8E48FA652BFB7776005A6C1F /* UITableViewCell.swift in Sources */,
 				8E2453022BF761B3004EB92F /* AppDelegate.swift in Sources */,
 				8EA068932BF787CF00A598FF /* SearchViewController.swift in Sources */,
 				8E3925C32BF77771004F65E7 /* SearchPresenter.swift in Sources */,
 				8E2453042BF761B3004EB92F /* SceneDelegate.swift in Sources */,
 				8EA0688C2BF77ABF00A598FF /* BaseViewController.swift in Sources */,
+				8E48FA632BFB7767005A6C1F /* UITableView.swift in Sources */,
+				8E48FA612BFB76FC005A6C1F /* LoadingView.swift in Sources */,
 				8EA0688F2BF784DD00A598FF /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

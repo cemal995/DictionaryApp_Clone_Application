@@ -108,6 +108,7 @@ final class SearchViewController: BaseViewController {
             return
         }
         presenter.addSearchQuery(query)
+        presenter.fetchWordDefinition(for: query)
     }
 }
 
@@ -125,6 +126,7 @@ extension SearchViewController: SearchViewControllerProtocol {
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.numberOfRecentSearches()
     }

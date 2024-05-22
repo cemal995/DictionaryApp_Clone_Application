@@ -6,17 +6,20 @@
 //
 
 import Foundation
+import DictionaryAPI
 
 protocol SearchInteractorProtocol: AnyObject {
     func addSearchQuery(_ query: String)
     func removeSearchQuery(at index: Int)
     func fetchRecentSearches() -> [String]
     func saveRecentSearches(_ searches: [String])
+    func fetchWordDefinition(for word: String)
 }
 
 protocol SearchInteractorOutputProtocol: AnyObject {
     func didUpdateRecentSearches()
     func didFailWithError(_ error: Error)
+    func didFetchWordDefinitions(_ definitions: [WordDefinition])
 }
 
 final class SearchInteractor {
@@ -24,6 +27,8 @@ final class SearchInteractor {
     weak var output: SearchInteractorOutputProtocol?
     
     private var searchModel = SearchModel()
+    
+    private let networkManager = NetworkManager.shared
     
     private let defaults = UserDefaults.standard
     
@@ -49,7 +54,9 @@ extension SearchInteractor: SearchInteractorProtocol {
         }
         searchModel.recentSearches.append(query)
         saveRecentSearches(searchModel.recentSearches)
-        output?.didUpdateRecentSearches()
+        DispatchQueue.main.async {
+            self.output?.didUpdateRecentSearches()
+        }
     }
     
     func removeSearchQuery(at index: Int) {
@@ -58,7 +65,9 @@ extension SearchInteractor: SearchInteractorProtocol {
         }
         searchModel.recentSearches.remove(at: index)
         saveRecentSearches(searchModel.recentSearches)
-        output?.didUpdateRecentSearches()
+        DispatchQueue.main.async {
+            self.output?.didUpdateRecentSearches()
+        }
     }
     
     func fetchRecentSearches() -> [String] {
@@ -67,6 +76,23 @@ extension SearchInteractor: SearchInteractorProtocol {
     
     func saveRecentSearches(_ searches: [String]) {
         defaults.set(searches, forKey: "RecentSearches")
+    }
+    
+    func fetchWordDefinition(for word: String) {
+        networkManager.fetchWordDefinition(for: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let definitions):
+                DispatchQueue.main.async {
+                    self.output?.didFetchWordDefinitions(definitions)
+                    // print(definitions)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.output?.didFailWithError(error)
+                }
+            }
+        }
     }
 }
 

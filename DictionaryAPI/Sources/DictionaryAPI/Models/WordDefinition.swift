@@ -9,6 +9,7 @@ import Foundation
 
 public struct WordDefinition: Decodable {
     public let word: String?
+    public let phonetic: String? 
     public let meanings: [Meaning]?
 }
 

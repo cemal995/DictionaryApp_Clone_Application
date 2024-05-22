@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+protocol DetailPresenterProtocol: AnyObject {
+    
+}
+
+final class DetailPresenter {
+    
+}
+
+extension DetailPresenter: DetailPresenterProtocol {
+    
+}
+
+extension DetailPresenter: DetailInteractorOutputProtocol {
+    
+}
