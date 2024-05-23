@@ -10,6 +10,8 @@ import UIKit
 
 protocol SplashViewControllerProtocol: AnyObject {
     func noInternetConnection()
+    func showLoadingView()
+    func hideLoadingView()
 }
 
 final class SplashViewController: BaseViewController {
@@ -18,7 +20,9 @@ final class SplashViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.viewDidAppear()
+        DispatchQueue.main.async {
+            self.presenter.viewDidAppear()
+        }
     }
     
 }
@@ -27,6 +31,14 @@ extension SplashViewController: SplashViewControllerProtocol {
     
     func noInternetConnection() {
         showAlert(title: "No Internet Connection", message: "There is a problem with your internet connection, please check your connection")
+    }
+    
+    func showLoadingView() {
+        showLoading()
+    }
+    
+    func hideLoadingView() {
+        hideLoading()
     }
     
     

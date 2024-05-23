@@ -32,27 +32,28 @@ class LoadingView {
     
     static func startLoading() {
         
-        guard !shared.activityIndicator.isAnimating else { return }
-        
-        if let windowScene = UIApplication.shared.connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .first(where: { $0.activationState == .foregroundActive }) {
+        DispatchQueue.main.async {
+            guard !shared.activityIndicator.isAnimating else { return }
             
-            shared.window = UIWindow(windowScene: windowScene)
-            shared.window?.addSubview(shared.blurView)
-            shared.window?.makeKeyAndVisible()
-            
-            shared.activityIndicator.startAnimating()
-            
+            if let windowScene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }) {
+                
+                shared.window = UIWindow(windowScene: windowScene)
+                shared.window?.addSubview(shared.blurView)
+                shared.window?.makeKeyAndVisible()
+                
+                shared.activityIndicator.startAnimating()
+            }
         }
     }
     
     func hideLoading() {
-        
-        blurView.removeFromSuperview()
-        activityIndicator.stopAnimating()
-        window = nil
-        
+        DispatchQueue.main.async {
+            self.blurView.removeFromSuperview()
+            self.activityIndicator.stopAnimating()
+            self.window = nil
+        }
     }
 }
 

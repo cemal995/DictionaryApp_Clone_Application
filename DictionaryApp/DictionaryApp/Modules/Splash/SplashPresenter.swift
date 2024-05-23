@@ -25,7 +25,10 @@ final class SplashPresenter: SplashPresenterProtocol {
     }
     
     func viewDidAppear() {
-        interactor.checkInternetConnection()
+        DispatchQueue.main.async {
+            self.view.showLoadingView()
+            self.interactor.checkInternetConnection()
+        }
     }
     
     
@@ -36,6 +39,7 @@ extension SplashPresenter: SplashInteractorOutputProtocol {
     func internetConnection(status: Bool) {
         if status {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.view.hideLoadingView()
                 self.router.navigate(.searchScreen)
             }
         }
