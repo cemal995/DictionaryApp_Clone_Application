@@ -20,7 +20,7 @@ final class DetailPresenter {
     var interactor: DetailInteractorProtocol
     var router: DetailRouterProtocol
     
-     init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol, wordDetails: [WordDefinition]) {
+    init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol, wordDetails: [WordDefinition]) {
         self.view = view
         self.interactor = interactor
         self.router = router

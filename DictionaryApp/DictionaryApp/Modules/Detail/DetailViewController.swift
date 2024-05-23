@@ -29,6 +29,7 @@ final class DetailViewController: BaseViewController {
     
     
     var wordDetails: [WordDefinition]?
+    var wordSynonyms: [Synonym]?
     var partsOfSpeech: [String] = []
     
     override func viewDidLoad() {
@@ -47,15 +48,16 @@ final class DetailViewController: BaseViewController {
 extension DetailViewController: DetailViewControllerProtocol {
     
     func playAudio(from url: URL) {
-                let playerItem = AVPlayerItem(url: url)
-                audioPlayer = AVPlayer(playerItem: playerItem)
-                audioPlayer?.play()
+        let playerItem = AVPlayerItem(url: url)
+        audioPlayer = AVPlayer(playerItem: playerItem)
+        audioPlayer?.play()
     }
     
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: DetailViewCell.self)
+        tableView.register(cellType: SynonymCell.self)
     }
     
     func configureLabels() {
@@ -72,10 +74,10 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
     
     func showError(_ message: String) {
-            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alertController, animated: true)
-        }
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
+    }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,41 +91,60 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
         
-        return wordDetails.reduce(0) { count, wordDefinition in
+        let definitionCount = wordDetails.reduce(0) { count, wordDefinition in
             if let meanings = wordDefinition.meanings {
                 return count + meanings.reduce(0) { $0 + ($1.definitions?.count ?? 0) }
             }
             return count
         }
+        
+        return definitionCount + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeCell(cellType: DetailViewCell.self, indexPath: indexPath)
-        
         guard let wordDetails = wordDetails else {
-            return cell
+            return UITableViewCell()
         }
         
-        var currentDefinitionIndex = 0
-        for wordDefinition in wordDetails {
+        let definitionCount = wordDetails.reduce(0) { count, wordDefinition in
             if let meanings = wordDefinition.meanings {
-                for meaning in meanings {
-                    if let definitions = meaning.definitions {
-                        for definition in definitions {
-                            if currentDefinitionIndex == indexPath.row {
-                                cell.configure(with: definition, partOfSpeech: meaning.partOfSpeech ?? "")
-                                return cell
+                return count + meanings.reduce(0) { $0 + ($1.definitions?.count ?? 0) }
+            }
+            return count
+        }
+        
+        if indexPath.row == definitionCount {
+            
+            let cell = tableView.dequeCell(cellType: SynonymCell.self, indexPath: indexPath)
+            if let synonyms = wordSynonyms {
+                cell.configure(with: synonyms)
+            }
+            return cell
+        } else {
+            
+            let cell = tableView.dequeCell(cellType: DetailViewCell.self, indexPath: indexPath)
+            
+            var currentDefinitionIndex = 0
+            for wordDefinition in wordDetails {
+                if let meanings = wordDefinition.meanings {
+                    for meaning in meanings {
+                        if let definitions = meaning.definitions {
+                            for definition in definitions {
+                                if currentDefinitionIndex == indexPath.row {
+                                    cell.configure(with: definition, partOfSpeech: meaning.partOfSpeech ?? "")
+                                    return cell
+                                }
+                                currentDefinitionIndex += 1
                             }
-                            currentDefinitionIndex += 1
                         }
                     }
                 }
             }
+            
+            return cell
         }
-        
-        return cell
-    }    
+    }
 }
+
 
 

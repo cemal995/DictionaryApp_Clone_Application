@@ -13,7 +13,7 @@ protocol SearchPresenterProtocol: AnyObject {
     func removeSearchQuery(at index: Int)
     func numberOfRecentSearches() -> Int
     func recentSearch(at index: Int) -> String
-    func fetchWordDefinition(for word: String)
+    func fetchWordDetails(for word: String)
 }
 
 final class SearchPresenter {
@@ -31,6 +31,10 @@ final class SearchPresenter {
 
 extension SearchPresenter: SearchPresenterProtocol {
     
+    func fetchWordDetails(for word: String) {
+        interactor.fetchWordDetails(for: word)
+    }
+    
     func addSearchQuery(_ query: String) {
         interactor.addSearchQuery(query)
     }
@@ -46,13 +50,15 @@ extension SearchPresenter: SearchPresenterProtocol {
     func recentSearch(at index: Int) -> String {
         return interactor.fetchRecentSearches()[index]
     }
-    
-    func fetchWordDefinition(for word: String) {
-        interactor.fetchWordDefinition(for: word) 
-    }
 }
 
 extension SearchPresenter: SearchInteractorOutputProtocol {
+    
+    func didFetchWordDetails(definitions: [WordDefinition], synonyms: [Synonym]) {
+        DispatchQueue.main.async {
+            self.router.navigateToWordDetails(details: definitions, synonyms: synonyms)
+        }
+    }
     
     func didUpdateRecentSearches() {
         DispatchQueue.main.async {
@@ -63,12 +69,6 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
     func didFailWithError(_ error: Error) {
         DispatchQueue.main.async {
             self.view.showError(error.localizedDescription)
-        }
-    }
-    
-    func didFetchWordDefinitions(_ definitions: [WordDefinition]) {
-        DispatchQueue.main.async {
-            self.router.navigateToWordDetails(details: definitions)
         }
     }
 }

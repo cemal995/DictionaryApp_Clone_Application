@@ -19,7 +19,7 @@ final class SearchViewController: BaseViewController {
     private var tableView: UITableView!
     private var searchButton: UIButton!
     private var searchBar: UISearchBar!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +27,7 @@ final class SearchViewController: BaseViewController {
         setupStandaloneSearchBar()
         setupSearchButton()
     }
-
+    
     private func setupNavigationBar() {
         
         navigationItem.title = "DictionaryDB"
@@ -107,7 +107,7 @@ final class SearchViewController: BaseViewController {
             return
         }
         presenter.addSearchQuery(query)
-        presenter.fetchWordDefinition(for: query)
+        presenter.fetchWordDetails(for: query)
     }
 }
 
@@ -149,7 +149,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = presenter.recentSearch(at: indexPath.row)
-        presenter.fetchWordDefinition(for: selectedWord)
+        presenter.fetchWordDetails(for: selectedWord)
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {

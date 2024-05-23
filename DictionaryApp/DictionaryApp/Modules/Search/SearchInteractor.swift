@@ -13,13 +13,15 @@ protocol SearchInteractorProtocol: AnyObject {
     func removeSearchQuery(at index: Int)
     func fetchRecentSearches() -> [String]
     func saveRecentSearches(_ searches: [String])
-    func fetchWordDefinition(for word: String)
+    //func fetchWordDefinition(for word: String)
+    //func fetchWordSynonym(for word: String)
+    func fetchWordDetails(for word: String)
 }
 
 protocol SearchInteractorOutputProtocol: AnyObject {
     func didUpdateRecentSearches()
     func didFailWithError(_ error: Error)
-    func didFetchWordDefinitions(_ definitions: [WordDefinition])
+    func didFetchWordDetails(definitions: [WordDefinition], synonyms: [Synonym])
 }
 
 final class SearchInteractor {
@@ -44,6 +46,44 @@ final class SearchInteractor {
 }
 
 extension SearchInteractor: SearchInteractorProtocol {
+    
+    func fetchWordDetails(for word: String) {
+        
+        var wordDefinitions: [WordDefinition]?
+        var wordSynonyms: [Synonym]?
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        networkManager.fetchWordDefinition(for: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let definitions):
+                wordDefinitions = definitions
+            case .failure(let error):
+                self.output?.didFailWithError(error)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        networkManager.fetchSynonyms(for: word) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let synonyms):
+                wordSynonyms = synonyms
+            case .failure(let error):
+                self.output?.didFailWithError(error)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            if let wordDefinitions = wordDefinitions, let wordSynonyms = wordSynonyms {
+                self.output?.didFetchWordDetails(definitions: wordDefinitions, synonyms: wordSynonyms)
+            }
+        }
+    }
     
     func addSearchQuery(_ query: String) {
         if searchModel.recentSearches.contains(query) {
@@ -76,23 +116,6 @@ extension SearchInteractor: SearchInteractorProtocol {
     
     func saveRecentSearches(_ searches: [String]) {
         defaults.set(searches, forKey: "RecentSearches")
-    }
-    
-    func fetchWordDefinition(for word: String) {
-        networkManager.fetchWordDefinition(for: word) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let definitions):
-                DispatchQueue.main.async {
-                    self.output?.didFetchWordDefinitions(definitions)
-                    // print(definitions)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.output?.didFailWithError(error)
-                }
-            }
-        }
     }
 }
 

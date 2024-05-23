@@ -9,7 +9,7 @@ import Foundation
 import DictionaryAPI
 
 protocol SearchRouterProtocol: AnyObject {
-    func navigateToWordDetails(details: [WordDefinition])
+    func navigateToWordDetails(details: [WordDefinition],synonyms: [Synonym])
 }
 
 final class SearchRouter {
@@ -30,10 +30,10 @@ final class SearchRouter {
 
 extension SearchRouter: SearchRouterProtocol {
     
-    func navigateToWordDetails(details: [WordDefinition]) { 
-           //let detailViewController = DetailViewController()
-        let detailViewController = DetailRouter.createModule(with: details)
-           detailViewController.wordDetails = details
-           viewController?.navigationController?.pushViewController(detailViewController, animated: true)
-       }
+    func navigateToWordDetails(details: [WordDefinition], synonyms: [Synonym]) {
+        let detailViewController = DetailRouter.createModule(details: details, synonyms: synonyms)
+        detailViewController.wordDetails = details
+        detailViewController.wordSynonyms = synonyms
+        viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }

@@ -31,8 +31,6 @@ class LoadingView {
     }
     
     static func startLoading() {
-        
-        DispatchQueue.main.async {
             guard !shared.activityIndicator.isAnimating else { return }
             
             if let windowScene = UIApplication.shared.connectedScenes
@@ -42,9 +40,7 @@ class LoadingView {
                 shared.window = UIWindow(windowScene: windowScene)
                 shared.window?.addSubview(shared.blurView)
                 shared.window?.makeKeyAndVisible()
-                
                 shared.activityIndicator.startAnimating()
-            }
         }
     }
     

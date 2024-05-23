@@ -16,7 +16,7 @@ final class DetailRouter {
     
     weak var viewController: DetailViewController?
     
-    static func createModule(with details: [WordDefinition]) -> DetailViewController {
+    static func createModule(details: [WordDefinition], synonyms: [Synonym]) -> DetailViewController {
         let view = DetailViewController()
         let interactor = DetailInteractor()
         let router = DetailRouter()
