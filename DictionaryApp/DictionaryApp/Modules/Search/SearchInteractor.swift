@@ -13,8 +13,6 @@ protocol SearchInteractorProtocol: AnyObject {
     func removeSearchQuery(at index: Int)
     func fetchRecentSearches() -> [String]
     func saveRecentSearches(_ searches: [String])
-    //func fetchWordDefinition(for word: String)
-    //func fetchWordSynonym(for word: String)
     func fetchWordDetails(for word: String)
 }
 

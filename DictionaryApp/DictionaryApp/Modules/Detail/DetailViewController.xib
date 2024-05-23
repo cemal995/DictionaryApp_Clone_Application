@@ -55,16 +55,16 @@
                             <color key="textColor" systemColor="secondaryLabelColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-xN-MBM">
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-xN-MBM">
                             <rect key="frame" x="0.0" y="125" width="377" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="DMf-Zx-QUt"/>
                             </constraints>
                             <segments>
-                                <segment title="All"/>
                                 <segment title="Noun"/>
                                 <segment title="Verb"/>
                                 <segment title="Adjective"/>
+                                <segment title="Adverb"/>
                             </segments>
                         </segmentedControl>
                     </subviews>
@@ -94,7 +94,7 @@
     <resources>
         <image name="speaker.wave.2.bubble" catalog="system" width="128" height="110"/>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
