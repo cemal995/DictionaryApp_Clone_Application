@@ -20,12 +20,23 @@ final class SearchViewController: BaseViewController {
     private var searchButton: UIButton!
     private var searchBar: UISearchBar!
     
+    private var searchButtonBottomConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
         setupStandaloneSearchBar()
         setupSearchButton()
+        registerForKeyboardNotifications()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    deinit {
+        unregisterForKeyboardNotifications()
     }
     
     private func setupNavigationBar() {
@@ -42,7 +53,7 @@ final class SearchViewController: BaseViewController {
             navigationItem.hidesBackButton = true
         }
     }
-
+    
     private func setupStandaloneSearchBar() {
         
         searchBar = UISearchBar()
@@ -93,21 +104,64 @@ final class SearchViewController: BaseViewController {
         searchButton.layer.shadowRadius = 2
         view.addSubview(searchButton)
         
+        
+        searchButtonBottomConstraint = searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        
         NSLayoutConstraint.activate([
             searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            searchButtonBottomConstraint,
             searchButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
-    @objc private func searchButtonTapped() {
+    private func registerForKeyboardNotifications() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func unregisterForKeyboardNotifications() {
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func handleSearch() {
+        
+        view.endEditing(true)
+        
         guard let query = searchBar.text, !query.isEmpty else {
             showError("Please enter a search query")
             return
         }
         presenter.addSearchQuery(query)
         presenter.fetchWordDetails(for: query)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            searchButtonBottomConstraint.constant = -keyboardHeight - 16
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        searchButtonBottomConstraint.constant = -16
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func searchButtonTapped() {
+        handleSearch()
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -137,6 +191,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = searchResult
         cell.accessoryType = .none
         
+        
+        let icon = UIImageView(image: UIImage(systemName: "magnifyingglass"))
+        icon.contentMode = .scaleAspectFit
+        icon.tintColor = .gray
+        cell.imageView?.image = icon.image
+        
         let deleteButton = UIButton(type: .custom)
         deleteButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         deleteButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -160,11 +220,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text, !query.isEmpty else {
-            showError("Please enter a search query")
-            return
-        }
-        presenter.addSearchQuery(query)
+        handleSearch()
     }
 }
 
