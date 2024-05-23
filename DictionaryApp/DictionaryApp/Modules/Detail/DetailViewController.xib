@@ -25,15 +25,30 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-Nn-FN3">
                     <rect key="frame" x="8" y="67" width="377" height="150"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0r-tl-0gT">
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuY-SD-llS">
                             <rect key="frame" x="0.0" y="0.0" width="377" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="GNZ-AM-2re"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0r-tl-0gT">
+                                    <rect key="frame" x="0.0" y="0.0" width="297" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="GNZ-AM-2re"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z27-e6-tuV">
+                                    <rect key="frame" x="297" y="0.0" width="80" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="eEb-18-myR"/>
+                                    </constraints>
+                                    <buttonConfiguration key="configuration" style="plain" image="speaker.wave.2.bubble.left" catalog="system"/>
+                                    <connections>
+                                        <action selector="audioButton:" destination="-1" eventType="touchUpInside" id="L4j-Z8-KjV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vs-E3-69V">
                             <rect key="frame" x="0.0" y="58" width="377" height="59"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -77,6 +92,7 @@
         </view>
     </objects>
     <resources>
+        <image name="speaker.wave.2.bubble.left" catalog="system" width="128" height="110"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

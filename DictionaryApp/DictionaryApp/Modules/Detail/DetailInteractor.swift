@@ -17,6 +17,8 @@ protocol DetailInteractorOutputProtocol: AnyObject {
 
 final class DetailInteractor {
     
+    weak var output: DetailInteractorOutputProtocol?
+    
 }
 
 extension DetailInteractor: DetailInteractorProtocol {

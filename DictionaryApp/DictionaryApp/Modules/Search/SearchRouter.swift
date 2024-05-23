@@ -30,10 +30,10 @@ final class SearchRouter {
 
 extension SearchRouter: SearchRouterProtocol {
     
-    func navigateToWordDetails(details: [WordDefinition]) {  // Ensure it uses the correct type
-           let detailViewController = DetailViewController()
+    func navigateToWordDetails(details: [WordDefinition]) { 
+           //let detailViewController = DetailViewController()
+        let detailViewController = DetailRouter.createModule(with: details)
            detailViewController.wordDetails = details
-        // print(details)
            viewController?.navigationController?.pushViewController(detailViewController, animated: true)
        }
 }

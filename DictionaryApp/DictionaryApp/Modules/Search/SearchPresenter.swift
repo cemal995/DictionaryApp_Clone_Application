@@ -18,9 +18,9 @@ protocol SearchPresenterProtocol: AnyObject {
 
 final class SearchPresenter {
     
-    unowned var view: SearchViewControllerProtocol
-    var interactor: SearchInteractorProtocol
-    var router: SearchRouterProtocol
+    unowned var view: SearchViewControllerProtocol!
+    var interactor: SearchInteractorProtocol!
+    var router: SearchRouterProtocol!
 
     init(view: SearchViewControllerProtocol, interactor: SearchInteractorProtocol, router: SearchRouterProtocol) {
         self.view = view

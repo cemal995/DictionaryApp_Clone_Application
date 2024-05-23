@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DictionaryAPI
 
 protocol DetailRouterProtocol: AnyObject {
     
@@ -13,6 +14,18 @@ protocol DetailRouterProtocol: AnyObject {
 
 final class DetailRouter {
     
+    weak var viewController: DetailViewController?
+    
+    static func createModule(with details: [WordDefinition]) -> DetailViewController {
+        let view = DetailViewController()
+        let interactor = DetailInteractor()
+        let router = DetailRouter()
+        let presenter = DetailPresenter(view: view, interactor: interactor, router: router, wordDetails: details)
+        view.presenter = presenter
+        interactor.output = presenter
+        router.viewController = view
+        return view
+    }
 }
 
 extension DetailRouter: DetailRouterProtocol {

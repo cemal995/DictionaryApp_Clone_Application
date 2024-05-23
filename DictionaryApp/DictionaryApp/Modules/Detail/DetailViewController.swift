@@ -6,18 +6,27 @@
 //
 
 import UIKit
+import Foundation
 import DictionaryAPI
+import AVFoundation
 
 protocol DetailViewControllerProtocol: AnyObject {
-    
+    func setupTableView()
+    func configureLabels()
+    func playAudio(from url: URL)
+    func showError(_ message: String)
 }
 
 final class DetailViewController: BaseViewController {
+    
+    var presenter: DetailPresenterProtocol!
+    var audioPlayer: AVPlayer?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var wordPhoneticLabel: UILabel!
     @IBOutlet weak var wordNameLabel: UILabel!
+    
     
     var wordDetails: [WordDefinition]?
     var partsOfSpeech: [String] = []
@@ -29,13 +38,27 @@ final class DetailViewController: BaseViewController {
         setupTableView()
     }
     
-    private func setupTableView() {
+    @IBAction func audioButton(_ sender: UIButton) {
+        presenter.playAudioButtonTapped()
+    }
+    
+}
+
+extension DetailViewController: DetailViewControllerProtocol {
+    
+    func playAudio(from url: URL) {
+                let playerItem = AVPlayerItem(url: url)
+                audioPlayer = AVPlayer(playerItem: playerItem)
+                audioPlayer?.play()
+    }
+    
+    func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: DetailViewCell.self)
     }
     
-    private func configureLabels() {
+    func configureLabels() {
         guard let wordDefinition = wordDetails?.first else {
             return
         }
@@ -48,10 +71,11 @@ final class DetailViewController: BaseViewController {
         wordPhoneticLabel.text = wordDefinition.phonetic ?? "Phonetic Not Available"
     }
     
-}
-
-extension DetailViewController: DetailViewControllerProtocol {
-    
+    func showError(_ message: String) {
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alertController, animated: true)
+        }
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
