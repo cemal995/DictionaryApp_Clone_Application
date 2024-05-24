@@ -41,7 +41,7 @@ final class SearchViewController: BaseViewController {
     
     private func setupNavigationBar() {
         
-        navigationItem.title = "DictionaryDB"
+        navigationItem.title = "WordWiz"
         
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.barTintColor = UIColor.purple

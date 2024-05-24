@@ -37,7 +37,6 @@ extension DetailPresenter: DetailPresenterProtocol {
             view.showError("Audio is not avaliable for this word, please try a different word!")
             return
         }
-        print("URL to play:", audioURL)
         view.playAudio(from: audioURL)
     }
 }

@@ -11,8 +11,6 @@ import DictionaryAPI
 
 class SynonymCell: UITableViewCell {
     
-    var fetchFunction: (() -> Void)?
-    
     @IBOutlet weak var synonymLabelOne: UILabel!
     @IBOutlet weak var synonymLabelTwo: UILabel!
     @IBOutlet weak var synonymLabelThree: UILabel!
