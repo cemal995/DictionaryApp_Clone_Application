@@ -25,7 +25,9 @@ The app follows the VIPER architectural pattern, which divides responsibilities 
 
 ## Screenshots
 
-![Splash Screen](Screenshots/splash_screen.png) ![Search Screen](Screenshots/search_screen.png) ![Detail Screen](Screenshots/detail_screen.png)
+| Launch Screen | Search View | Detail View | Synonyms | 
+|:---------------:|:--------:|:--------:|:--------:|
+| ![Launch Screen](screenshoots/LaunchScreen.png) | ![Search View](screenshoots/SearchView.png) | ![DetailView](screenshoots/DetailView.png) | ![DetailView](screenshoots/Synonyms.png) |
 
 ## Areas for Improvement
 
