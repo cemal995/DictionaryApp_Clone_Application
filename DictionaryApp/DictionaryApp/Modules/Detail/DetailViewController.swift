@@ -37,10 +37,18 @@ final class DetailViewController: BaseViewController {
         
         configureLabels()
         setupTableView()
+        setupAccessibilityIdentifiers()
     }
     
     @IBAction func audioButton(_ sender: UIButton) {
         presenter.playAudioButtonTapped()
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        tableView.accessibilityIdentifier = "DetailViewTableView"
+        segmentedControl.accessibilityIdentifier = "DetailViewSegmentedControl"
+        wordPhoneticLabel.accessibilityIdentifier = "wordPhoneticLabel"
+        wordNameLabel.accessibilityIdentifier = "wordNameLabel"
     }
     
 }

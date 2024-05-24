@@ -29,6 +29,7 @@ final class SearchViewController: BaseViewController {
         setupStandaloneSearchBar()
         setupSearchButton()
         registerForKeyboardNotifications()
+        setupAccessibilityIdentifiers()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -48,7 +49,6 @@ final class SearchViewController: BaseViewController {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationBar.tintColor = UIColor.white
-            
             navigationBar.isTranslucent = false
             navigationItem.hidesBackButton = true
         }
@@ -61,6 +61,8 @@ final class SearchViewController: BaseViewController {
         searchBar.tintColor = .white
         searchBar.barTintColor = .white
         searchBar.delegate = self
+        searchBar.becomeFirstResponder()
+        searchBar.accessibilityIdentifier = "SearchViewSearchBar"
         view.addSubview(searchBar)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +81,7 @@ final class SearchViewController: BaseViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.accessibilityIdentifier = "SearchViewTableView"
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +105,7 @@ final class SearchViewController: BaseViewController {
         searchButton.layer.shadowColor = UIColor.black.cgColor
         searchButton.layer.shadowOpacity = 0.3
         searchButton.layer.shadowRadius = 2
+        searchButton.accessibilityIdentifier = "SearchViewSearchButton"
         view.addSubview(searchButton)
         
         
@@ -137,6 +141,12 @@ final class SearchViewController: BaseViewController {
         }
         presenter.addSearchQuery(query)
         presenter.fetchWordDetails(for: query)
+    }
+    
+    private func setupAccessibilityIdentifiers() {
+        searchBar.accessibilityIdentifier = "SearchViewSearchBar"
+        searchButton.accessibilityIdentifier = "SearchViewSearchButton"
+        tableView.accessibilityIdentifier = "SearchViewTableView"
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

@@ -39,6 +39,7 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z27-e6-tuV">
                                     <rect key="frame" x="297" y="0.0" width="80" height="50"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="AudioButton"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="eEb-18-myR"/>
                                     </constraints>

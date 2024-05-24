@@ -8,34 +8,107 @@
 import XCTest
 
 final class DictionaryAppUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+    
+    private var app: XCUIApplication!
+    
+    override func setUp() {
+        super.setUp()
+        
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        app = XCUIApplication()
+        app.launchArguments.append("********** TEST STARTED **********")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+    
+    func test_exists_element() {
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        sleep(3)
+        XCTAssertTrue(app.isSearchViewTableViewDisplayed, "SearchView Table View does not exists")
+        
+        sleep(2)
+        XCTAssertTrue(app.isSearchViewSearchButtonDisplayed, "SearchView Search Button does not exists")
+        sleep(5)
+        XCTAssertTrue(app.searchFields["Search"].exists, "SearchView Search Bar does not exists")
+        
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func test_click_SearchButton() {
+        app.launch()
+        app.SearchViewSearchButton.tap()
     }
+    
+    func test_navigate_to_detailview_from_tableView() {
+        app.launch()
+        sleep(3)
+        XCTAssertTrue(app.isSearchViewTableViewDisplayed, "SearchView Table View does not exists")
+        let firstCell = app.SearchViewTableView.cells.element(boundBy: 0)
+        firstCell.tap()
+        sleep(5)
+        XCTAssertTrue(app.isDetailViewTableViewDisplayed, "DetailView Table View does not exists")
+    }
+    
+    func test_audio_button_played() {
+        app.launch()
+        sleep(3)
+        XCTAssertTrue(app.isSearchViewTableViewDisplayed, "SearchView Table View does not exists")
+        app/*@START_MENU_TOKEN@*/.searchFields["Search"]/*[[".otherElements[\"SearchViewSearchBar\"].searchFields[\"Search\"]",".searchFields[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.searchFields["Search"].typeText("Drive")
+        app.SearchViewSearchButton.tap()
+        app.SearchViewSearchButton.tap()
+        XCTAssertTrue(app.isAudioButtonDisplayed, "Audio Button does not exists")
+        app.AudioButton.tap()
+    }
+    
+    func test_searchbar_search() {
+        app.launch()
+        app/*@START_MENU_TOKEN@*/.searchFields["Search"]/*[[".otherElements[\"SearchViewSearchBar\"].searchFields[\"Search\"]",".searchFields[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.searchFields["Search"].typeText("Drive")
+        app.SearchViewSearchButton.tap()
+    }
+    
+    
+}
+
+extension XCUIApplication {
+    
+    var SearchViewSearchBar: XCUIElement! {
+        searchFields["SearchViewSearchBar"]
+    }
+    
+    var SearchViewSearchButton: XCUIElement! {
+        buttons["SearchViewSearchButton"]
+    }
+    
+    var SearchViewTableView: XCUIElement! {
+        tables["SearchViewTableView"]
+    }
+    
+    var DetailViewTableView: XCUIElement {
+        tables["DetailViewTableView"]
+    }
+    
+    var AudioButton: XCUIElement {
+        buttons["AudioButton"]
+    }
+    
+    var isSearchViewSearchBarDisplayed: Bool {
+        SearchViewSearchBar.exists
+    }
+    
+    var isSearchViewSearchButtonDisplayed: Bool {
+        SearchViewSearchButton.exists
+    }
+    
+    var isSearchViewTableViewDisplayed: Bool {
+        SearchViewTableView.exists
+    }
+    
+    var isDetailViewTableViewDisplayed: Bool {
+        DetailViewTableView.exists
+    }
+    
+    var isAudioButtonDisplayed: Bool {
+        AudioButton.exists
+    }
+    
 }
