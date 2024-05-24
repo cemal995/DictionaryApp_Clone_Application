@@ -8,6 +8,8 @@
 import Foundation
 import DictionaryAPI
 
+// MARK: - SearchInteractorProtocol
+/// Protocol for the search interactor.
 protocol SearchInteractorProtocol: AnyObject {
     func addSearchQuery(_ query: String)
     func removeSearchQuery(at index: Int)
@@ -16,12 +18,16 @@ protocol SearchInteractorProtocol: AnyObject {
     func fetchWordDetails(for word: String)
 }
 
+// MARK: - SearchInteractorOutputProtocol
+/// Protocol for the output of search interactor.
 protocol SearchInteractorOutputProtocol: AnyObject {
     func didUpdateRecentSearches()
     func didFailWithError(_ error: Error)
     func didFetchWordDetails(definitions: [WordDefinition], synonyms: [Synonym])
 }
 
+// MARK: - SearchInteractor
+/// Interactor responsible for search functionality.
 final class SearchInteractor {
     
     weak var output: SearchInteractorOutputProtocol?
@@ -43,6 +49,7 @@ final class SearchInteractor {
     }
 }
 
+// MARK: - SearchInteractorProtocol
 extension SearchInteractor: SearchInteractorProtocol {
     
     func fetchWordDetails(for word: String) {

@@ -7,11 +7,15 @@
 
 import Foundation
 
+// MARK: - NetworkService Protocol
+/// A protocol defining methods for network service.
 public protocol NetworkService {
     func fetchWordDefinition(for word: String, completion: @escaping (Result<[WordDefinition], NetworkError>) -> Void)
     func fetchSynonyms(for word: String, completion: @escaping (Result<[Synonym], NetworkError>) -> Void)
 }
 
+// MARK: - NetworkError Enum
+/// An enum representing different network errors.
 public enum NetworkError: Error {
     case invalidURL
     case noData
@@ -19,6 +23,7 @@ public enum NetworkError: Error {
     case serverError(statusCode: Int)
     case unknown(Error)
     
+    /// A localized description of the error.
     var localizedDescription: String {
         switch self {
         case .invalidURL:

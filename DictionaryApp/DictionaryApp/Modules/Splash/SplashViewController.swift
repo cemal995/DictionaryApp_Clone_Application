@@ -5,21 +5,28 @@
 //  Created by Cemalhan Alptekin on 17.05.2024.
 //
 
-import Foundation
 import UIKit
 
+// MARK: - SplashViewControllerProtocol
+/// Protocol for handling splash view controller events.
 protocol SplashViewControllerProtocol: AnyObject {
     func noInternetConnection()
     func showLoadingView()
     func hideLoadingView()
 }
 
+// MARK: - SplashViewController
+/// View controller for the splash screen.
 final class SplashViewController: BaseViewController {
     
+    // MARK: - Properties
     var presenter: SplashPresenterProtocol!
+    
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Perform initial setup
         DispatchQueue.main.async {
             self.presenter.viewDidAppear()
         }
@@ -27,6 +34,7 @@ final class SplashViewController: BaseViewController {
     
 }
 
+// MARK: - SplashViewControllerProtocol
 extension SplashViewController: SplashViewControllerProtocol {
     
     func noInternetConnection() {

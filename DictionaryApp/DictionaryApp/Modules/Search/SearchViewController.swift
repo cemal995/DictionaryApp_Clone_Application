@@ -5,15 +5,21 @@
 //  Created by Cemalhan Alptekin on 17.05.2024.
 //
 
+
 import UIKit
 
+// MARK: - SearchViewControllerProtocol
+/// Protocol for the search view controller.
 protocol SearchViewControllerProtocol: AnyObject {
     func reloadData()
     func showError(_ message: String)
 }
 
+// MARK: - SearchViewController
+/// View controller responsible for displaying search functionality.
 final class SearchViewController: BaseViewController {
     
+    // MARK: - Properties
     var presenter: SearchPresenterProtocol!
     
     private var tableView: UITableView!
@@ -22,6 +28,7 @@ final class SearchViewController: BaseViewController {
     
     private var searchButtonBottomConstraint: NSLayoutConstraint!
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,12 +41,14 @@ final class SearchViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
+        
     }
     
     deinit {
         unregisterForKeyboardNotifications()
     }
     
+    // MARK: - Setup Methods
     private func setupNavigationBar() {
         
         navigationItem.title = "WordWiz"
@@ -61,16 +70,16 @@ final class SearchViewController: BaseViewController {
         searchBar.tintColor = .white
         searchBar.barTintColor = .white
         searchBar.delegate = self
-        searchBar.becomeFirstResponder()
         searchBar.accessibilityIdentifier = "SearchViewSearchBar"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)
         
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         ])
+        
         setupTableView()
     }
     
@@ -82,9 +91,9 @@ final class SearchViewController: BaseViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.accessibilityIdentifier = "SearchViewTableView"
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -108,7 +117,6 @@ final class SearchViewController: BaseViewController {
         searchButton.accessibilityIdentifier = "SearchViewSearchButton"
         view.addSubview(searchButton)
         
-        
         searchButtonBottomConstraint = searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         
         NSLayoutConstraint.activate([
@@ -131,6 +139,7 @@ final class SearchViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // MARK: - User Actions
     private func handleSearch() {
         
         view.endEditing(true)
@@ -144,12 +153,14 @@ final class SearchViewController: BaseViewController {
     }
     
     private func setupAccessibilityIdentifiers() {
+        
         searchBar.accessibilityIdentifier = "SearchViewSearchBar"
         searchButton.accessibilityIdentifier = "SearchViewSearchButton"
         tableView.accessibilityIdentifier = "SearchViewTableView"
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
+        
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
             searchButtonBottomConstraint.constant = -keyboardHeight - 16
@@ -160,6 +171,7 @@ final class SearchViewController: BaseViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
+        
         searchButtonBottomConstraint.constant = -16
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -170,11 +182,17 @@ final class SearchViewController: BaseViewController {
         handleSearch()
     }
     
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        let tapLocation = sender.location(in: view)
+        if !searchButton.frame.contains(tapLocation) {
+            view.endEditing(true)
+        }
     }
+    
 }
 
+// MARK: - SearchViewControllerProtocol
 extension SearchViewController: SearchViewControllerProtocol {
     
     func reloadData() {
@@ -188,6 +206,7 @@ extension SearchViewController: SearchViewControllerProtocol {
     }
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -227,6 +246,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

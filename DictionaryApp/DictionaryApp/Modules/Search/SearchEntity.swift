@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - SearchModel
+/// Entity representing search data.
 struct SearchModel {
     var recentSearches: [String] = []
 }

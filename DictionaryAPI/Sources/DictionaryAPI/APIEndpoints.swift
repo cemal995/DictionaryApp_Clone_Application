@@ -7,6 +7,9 @@
 
 import Foundation
 
+
+// MARK: - APIEndpoints
+/// A struct containing static methods to generate API endpoints.
 public struct APIEndpoints {
     
     public static func wordDefinitionURL(for word: String) -> URL? {

@@ -8,10 +8,13 @@
 import Foundation
 import DictionaryAPI
 
+// MARK: - DetailRouterProtocol
+/// Protocol for the Detail Router.
 protocol DetailRouterProtocol: AnyObject {
     
 }
 
+/// Router responsible for navigation from the Detail module.
 final class DetailRouter {
     
     weak var viewController: DetailViewController?
@@ -28,6 +31,7 @@ final class DetailRouter {
     }
 }
 
+// MARK: - DetailRouterProtocol Extension
 extension DetailRouter: DetailRouterProtocol {
     
 }

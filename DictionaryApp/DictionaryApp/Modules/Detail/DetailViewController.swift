@@ -10,6 +10,8 @@ import Foundation
 import DictionaryAPI
 import AVFoundation
 
+// MARK: - DetailViewControllerProtocol
+/// Protocol defining actions for the detail view controller.
 protocol DetailViewControllerProtocol: AnyObject {
     func setupTableView()
     func configureLabels()
@@ -17,20 +19,19 @@ protocol DetailViewControllerProtocol: AnyObject {
     func showError(_ message: String)
 }
 
+// MARK: - DetailViewController
+/// View controller responsible for displaying word details.
 final class DetailViewController: BaseViewController {
     
     var presenter: DetailPresenterProtocol!
     var audioPlayer: AVPlayer?
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var wordPhoneticLabel: UILabel!
-    @IBOutlet weak var wordNameLabel: UILabel!
-    
-    
     var wordDetails: [WordDefinition]?
     var wordSynonyms: [Synonym]?
     var partsOfSpeech: [String] = []
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var wordPhoneticLabel: UILabel!
+    @IBOutlet weak var wordNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +47,12 @@ final class DetailViewController: BaseViewController {
     
     private func setupAccessibilityIdentifiers() {
         tableView.accessibilityIdentifier = "DetailViewTableView"
-        segmentedControl.accessibilityIdentifier = "DetailViewSegmentedControl"
         wordPhoneticLabel.accessibilityIdentifier = "wordPhoneticLabel"
         wordNameLabel.accessibilityIdentifier = "wordNameLabel"
     }
-    
 }
 
+// MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
     
     func playAudio(from url: URL) {
@@ -88,6 +88,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

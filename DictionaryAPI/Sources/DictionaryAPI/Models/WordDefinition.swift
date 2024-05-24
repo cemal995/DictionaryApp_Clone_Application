@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - WordDefinition
+/// Structure representing a word definition.
 public struct WordDefinition: Decodable {
     public let word: String?
     public let phonetic: String? 

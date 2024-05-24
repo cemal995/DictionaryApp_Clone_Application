@@ -8,14 +8,20 @@
 import Foundation
 import DictionaryAPI
 
+// MARK: - SearchRouterProtocol
+/// Protocol defining navigation actions for the search module.
 protocol SearchRouterProtocol: AnyObject {
+    /// Navigate to word details screen.
     func navigateToWordDetails(details: [WordDefinition],synonyms: [Synonym])
 }
 
+// MARK: - SearchRouter
+/// Router responsible for navigating to different screens within the search module.
 final class SearchRouter {
     
     weak var viewController: SearchViewController?
     
+    /// Create a module for the search screen.
     static func createModule() -> SearchViewController{
         let view = SearchViewController()
         let interactor = SearchInteractor()

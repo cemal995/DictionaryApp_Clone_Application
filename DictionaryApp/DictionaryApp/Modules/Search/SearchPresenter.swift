@@ -8,6 +8,8 @@
 import Foundation
 import DictionaryAPI
 
+// MARK: - SearchPresenterProtocol
+/// Protocol for the search presenter.
 protocol SearchPresenterProtocol: AnyObject {
     func addSearchQuery(_ query: String)
     func removeSearchQuery(at index: Int)
@@ -16,12 +18,14 @@ protocol SearchPresenterProtocol: AnyObject {
     func fetchWordDetails(for word: String)
 }
 
+// MARK: - SearchPresenter
+/// Presenter responsible for search functionality.
 final class SearchPresenter {
     
     unowned var view: SearchViewControllerProtocol!
     var interactor: SearchInteractorProtocol!
     var router: SearchRouterProtocol!
-
+    
     init(view: SearchViewControllerProtocol, interactor: SearchInteractorProtocol, router: SearchRouterProtocol) {
         self.view = view
         self.interactor = interactor
@@ -29,6 +33,7 @@ final class SearchPresenter {
     }
 }
 
+// MARK: - SearchPresenterProtocol
 extension SearchPresenter: SearchPresenterProtocol {
     
     func fetchWordDetails(for word: String) {
@@ -52,6 +57,7 @@ extension SearchPresenter: SearchPresenterProtocol {
     }
 }
 
+// MARK: - SearchInteractorOutputProtocol
 extension SearchPresenter: SearchInteractorOutputProtocol {
     
     func didFetchWordDetails(definitions: [WordDefinition], synonyms: [Synonym]) {

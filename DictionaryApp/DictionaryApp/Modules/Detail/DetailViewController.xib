@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="DictionaryApp" customModuleProvider="target">
             <connections>
-                <outlet property="segmentedControl" destination="RMN-xN-MBM" id="1EY-NB-Nf1"/>
                 <outlet property="tableView" destination="DOd-by-fIL" id="4pg-HA-Tla"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wordNameLabel" destination="d0r-tl-0gT" id="g5f-u2-NKP"/>
@@ -23,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-Nn-FN3">
-                    <rect key="frame" x="8" y="67" width="377" height="150"/>
+                    <rect key="frame" x="8" y="67" width="377" height="100"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuY-SD-llS">
                             <rect key="frame" x="0.0" y="0.0" width="377" height="50"/>
@@ -51,30 +50,18 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vs-E3-69V">
-                            <rect key="frame" x="0.0" y="58" width="377" height="59"/>
+                            <rect key="frame" x="0.0" y="58" width="377" height="42"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             <color key="textColor" systemColor="secondaryLabelColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-xN-MBM">
-                            <rect key="frame" x="0.0" y="125" width="377" height="26"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="DMf-Zx-QUt"/>
-                            </constraints>
-                            <segments>
-                                <segment title="Noun"/>
-                                <segment title="Verb"/>
-                                <segment title="Adjective"/>
-                                <segment title="Adverb"/>
-                            </segments>
-                        </segmentedControl>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="6iE-sG-sOR"/>
+                        <constraint firstAttribute="height" constant="100" id="6iE-sG-sOR"/>
                     </constraints>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DOd-by-fIL">
-                    <rect key="frame" x="0.0" y="225" width="393" height="593"/>
+                    <rect key="frame" x="0.0" y="175" width="393" height="643"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>

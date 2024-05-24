@@ -8,10 +8,14 @@
 import Foundation
 import DictionaryAPI
 
+// MARK: - DetailPresenterProtocol
+/// Protocol for the Detail Presenter.
 protocol DetailPresenterProtocol: AnyObject {
+    /// Informs the presenter that the play audio button is tapped.
     func playAudioButtonTapped()
 }
 
+/// Presenter responsible for coordinating actions within the Detail module.
 final class DetailPresenter {
     
     var wordDetails: [WordDefinition]?
@@ -26,9 +30,9 @@ final class DetailPresenter {
         self.router = router
         self.wordDetails = wordDetails
     }
-    
 }
 
+// MARK: - DetailPresenterProtocol Methods
 extension DetailPresenter: DetailPresenterProtocol {
     
     func playAudioButtonTapped() {
@@ -41,6 +45,7 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 }
 
+// MARK: - DetailInteractorOutputProtocol Extension
 extension DetailPresenter: DetailInteractorOutputProtocol {
     
 }

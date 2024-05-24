@@ -54,7 +54,6 @@ final class DictionaryAppUITests: XCTestCase {
         app/*@START_MENU_TOKEN@*/.searchFields["Search"]/*[[".otherElements[\"SearchViewSearchBar\"].searchFields[\"Search\"]",".searchFields[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.searchFields["Search"].typeText("Drive")
         app.SearchViewSearchButton.tap()
-        app.SearchViewSearchButton.tap()
         XCTAssertTrue(app.isAudioButtonDisplayed, "Audio Button does not exists")
         app.AudioButton.tap()
     }
@@ -62,6 +61,7 @@ final class DictionaryAppUITests: XCTestCase {
     func test_searchbar_search() {
         app.launch()
         app/*@START_MENU_TOKEN@*/.searchFields["Search"]/*[[".otherElements[\"SearchViewSearchBar\"].searchFields[\"Search\"]",".searchFields[\"Search\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        sleep(2)
         app.searchFields["Search"].typeText("Drive")
         app.SearchViewSearchButton.tap()
     }
