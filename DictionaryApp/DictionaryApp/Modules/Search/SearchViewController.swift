@@ -237,6 +237,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let selectedWord = presenter.recentSearch(at: indexPath.row)
         presenter.fetchWordDetails(for: selectedWord)
     }
